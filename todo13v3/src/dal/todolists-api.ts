@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {CreateTaskOfTodolist} from "../stories/todolists-api.stories";
 const settings = {
     withCredentials: true,
     headers: {
@@ -50,5 +51,17 @@ export const api = {
     },
     updateTodolists(todolistId: string, title: string) {
         return instance.put<ResponceType<{}>>(`todo-lists/${todolistId}`, {title})
-    }
+    },
+    getTasksOfTodolist(todolistId: string) {
+        return instance.get(`todo-lists/${todolistId}/tasks`)
+    },
+    createTaskOfTodolist(todolistId: string, title: string) {
+        return instance.post(`todo-lists/${todolistId}/tasks`, {title: title})
+    },
+    renameTaskOfTodolist(todolistId: string, taskId: string, title: string) {
+        return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
+    },
+    deleteTaskOfTodolist(todolistId: string, taskId: string) {
+        return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
 }
